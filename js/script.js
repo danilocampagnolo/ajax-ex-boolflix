@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
-  $("button").click(function() {
-    var userFilm = $("input").val();
+  $("button[name='search']").click(function() {
+    var userFilm = $("input[name='title-to-find']").val();
     $.ajax({
       url: "https://api.themoviedb.org/3/search/movie",
       method: "GET",
