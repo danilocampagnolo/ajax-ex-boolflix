@@ -13,9 +13,11 @@ $(document).ready(function() {
       success: function(data) {
         var filmsFound = data.results;
         if (filmsFound.length == 0) {
-          alert("nessun risultato")
+          $("input[name='title-to-find']").val("");
+          alert("nessun risultato");
+        } else {
+          printFilmsFound(filmsFound);
         }
-        printFilmsFound(filmsFound);
       },
       error: function(errors) {
         alert("errore " + errors)
@@ -26,6 +28,7 @@ $(document).ready(function() {
 
 function printFilmsFound(array) {
   $(".films").text("");
+  $("input[name='title-to-find']").val("");
   for (var i = 0; i < array.length; i++) {
     array[i]
     // handlebars
