@@ -14,8 +14,8 @@ $(document).ready(function() {
         var filmsFound = data.results;
         printFilmsFound(filmsFound);
       },
-      error: function() {
-
+      error: function(errors) {
+        alert("errore " + errors)
       }
     });
   });
@@ -28,11 +28,7 @@ function printFilmsFound(array) {
     // handlebars
     var source = document.getElementById("entry-template").innerHTML;
     var template = Handlebars.compile(source);
-    var context = {
-      original_title: array[i].original_title,
-      original_language: array[i].original_language,
-      vote_average: array[i].vote_average
-    };
+    var context = array[i];
     var html = template(context);
     $(".films").append(html);
   }
