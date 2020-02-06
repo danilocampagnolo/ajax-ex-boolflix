@@ -8,15 +8,23 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- handlebars -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.js" charset="utf-8"></script>
   <title>Document</title>
 </head>
 <body>
   <input type="text" name="" value="" placeholder="cerca">
   <button type="button" name="button"> Invio </button>
-  
+
   <ul class="films">
 
   </ul>
+
+  <script id="entry-template" type="text/x-handlebars-template">
+  <li class="entry">
+    {{original_title}} {{original_language}} {{vote_average}}
+  </li>
+</script>
 
   <script src="js/script.js" charset="utf-8"></script>
 </body>
