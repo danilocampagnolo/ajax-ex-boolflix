@@ -12,6 +12,9 @@ $(document).ready(function() {
       },
       success: function(data) {
         var filmsFound = data.results;
+        if (filmsFound.length == 0) {
+          alert("nessun risultato")
+        }
         printFilmsFound(filmsFound);
       },
       error: function(errors) {
