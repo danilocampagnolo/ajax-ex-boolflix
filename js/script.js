@@ -11,9 +11,7 @@ function search() {
   var urlMovies = "https://api.themoviedb.org/3/search/movie";
   var urlSeries = "https://api.themoviedb.org/3/search/tv";
   var api_key = "7da5370534299b384b1d9988b39b33f8";
-  $("h1").text("movies");
   getFilms(urlMovies, api_key, userFilm);
-  $("h1").text("series");
   getFilms(urlSeries, api_key, userFilm);
 }
 
@@ -94,6 +92,7 @@ function printVoteStar(num) {
 }
 
 function printNationFlag(string) {
+
   var arrayFlags = ["de", "en", "es", "fr", "it"];
   if (arrayFlags.includes(string)) {
     var flag = "<img src=flags/"+ string +".svg>";
