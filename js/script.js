@@ -63,13 +63,15 @@ function printNoResult() {
 }
 
 function printVoteStar(num) {
-  vote = Math.round(num) / 2;
+  vote = Math.round(num / 2);
   var tagStar = '';
   for (var i = 0; i < 5; i++) {
     if (i < vote) {
-      var tagStar = "<i class='fas fa-star'></i>";
+      console.log(num);
+      console.log(vote);
+      var tagStar = tagStar + " <i class='fas fa-star'></i>";
     } else {
-      var tagStar = "<i class='far fa-star'></i>";
+      var tagStar = tagStar + "<i class='far fa-star'></i>";
     }
   }
   return tagStar;
