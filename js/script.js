@@ -2,6 +2,7 @@ $(document).ready(function() {
   $("button[name='search-film']").click(function() {
     var userFilm = $("input[name='title-to-find']").val();
     getMovies(userFilm);
+    getSeries(userFilm);
   });
 });
 
@@ -23,7 +24,32 @@ function getMovies(string) {
       if (filmsFound.length == 0) {
         printNoResult();
       } else {
-        printFilmsFound(filmsFound);
+        printFilmsFound(filmsFound, "movies");
+      }
+    },
+    error: function(errors) {
+      alert("errore " + errors);
+    }
+  });
+}
+function getSeries(string) {
+  var url = "https://api.themoviedb.org/3/search/tv";
+  var api_key = "7da5370534299b384b1d9988b39b33f8";
+  $.ajax({
+    url: url,
+    method: "GET",
+    data: {
+      api_key: api_key,
+      query: string,
+      language: "it-IT"
+    },
+    success: function(data) {
+      resetSearch();
+      var filmsFound = data.results;
+      if (filmsFound.length == 0) {
+        printNoResult();
+      } else {
+        printFilmsFound(filmsFound, "series");
       }
     },
     error: function(errors) {
@@ -37,18 +63,30 @@ function resetSearch() {
   $(".films").text("");
 }
 
-function printFilmsFound(array) {
+function printFilmsFound(array, type) {
   for (var i = 0; i < array.length; i++) {
     // handlebars
     var source = document.getElementById("films-template").innerHTML;
     var template = Handlebars.compile(source);
-    var context = {
-      title : array[i].title,
-      original_title : array[i].original_title,
-      original_language : printNationFlag(array[i].original_language),
-      vote_average : array[i].vote_average,
-      tagStar : printVoteStar(array[i].vote_average)
-    };
+    if (type == "movies") {
+      var context = {
+        title : array[i].title,
+        original_title : array[i].original_title,
+        original_language : printNationFlag(array[i].original_language),
+        vote_average : array[i].vote_average,
+        tagStar : printVoteStar(array[i].vote_average),
+        type : "movies"
+      };
+    } else if (type == "series") {
+      var context = {
+        title : array[i].name,
+        original_title : array[i].original_name,
+        original_language : printNationFlag(array[i].original_language),
+        vote_average : array[i].vote_average,
+        tagStar : printVoteStar(array[i].vote_average),
+        type : "series"
+      };
+    }
     var html = template(context);
     $(".films").append(html);
   }

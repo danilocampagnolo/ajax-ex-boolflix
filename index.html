@@ -21,6 +21,12 @@
   <ul class="films">
   </ul>
 
+  <script id="noresult-template" type="text/x-handlebars-template">
+    <li class="entry">
+      Non ci sono risultati.
+    </li>
+  </script>
+
   <script id="films-template" type="text/x-handlebars-template">
     <li class="entry">
       <h3>{{title}}</h3>
@@ -37,13 +43,11 @@
           <h4>Vote:</h4>
           {{vote_average}} {{{tagStar}}}
         </li>
+        <li>
+          <h4>Type:</h4>
+          {{type}}
+        </li>
       </ul>
-    </li>
-  </script>
-
-  <script id="noresult-template" type="text/x-handlebars-template">
-    <li class="entry">
-      Non ci sono risultati.
     </li>
   </script>
 
