@@ -1,40 +1,23 @@
 $(document).ready(function() {
   $("button[name='search-film']").click(function() {
-    var userFilm = $("input[name='title-to-find']").val();
-    getMovies(userFilm);
-    getSeries(userFilm);
+    search();
+    resetSearch();
   });
 });
 
 // ================ FUNCTION =================
-function getMovies(string) {
-  var url = "https://api.themoviedb.org/3/search/movie";
+function search() {
+  var userFilm = $("input[name='title-to-find']").val();
+  var urlMovies = "https://api.themoviedb.org/3/search/movie";
+  var urlSeries = "https://api.themoviedb.org/3/search/tv";
   var api_key = "7da5370534299b384b1d9988b39b33f8";
-  $.ajax({
-    url: url,
-    method: "GET",
-    data: {
-      api_key: api_key,
-      query: string,
-      language: "it-IT"
-    },
-    success: function(data) {
-      resetSearch();
-      var filmsFound = data.results;
-      if (filmsFound.length == 0) {
-        printNoResult();
-      } else {
-        printFilmsFound(filmsFound, "movies");
-      }
-    },
-    error: function(errors) {
-      alert("errore " + errors);
-    }
-  });
+  getFilms(urlMovies, api_key, userFilm);
+  getFilms(urlSeries, api_key, userFilm)
 }
-function getSeries(string) {
-  var url = "https://api.themoviedb.org/3/search/tv";
-  var api_key = "7da5370534299b384b1d9988b39b33f8";
+
+function getFilms(url, api_key, string) {
+  var url = url;
+  var api_key = api_key;
   $.ajax({
     url: url,
     method: "GET",
@@ -44,12 +27,11 @@ function getSeries(string) {
       language: "it-IT"
     },
     success: function(data) {
-      resetSearch();
       var filmsFound = data.results;
       if (filmsFound.length == 0) {
         printNoResult();
       } else {
-        printFilmsFound(filmsFound, "series");
+        printFilmsFound(filmsFound);
       }
     },
     error: function(errors) {
@@ -63,30 +45,26 @@ function resetSearch() {
   $(".films").text("");
 }
 
-function printFilmsFound(array, type) {
+function printFilmsFound(array) {
   for (var i = 0; i < array.length; i++) {
+    var title = array[i].title;
+    if (typeof(title) == "undefined") {
+      title = array[i].name;
+    }
+    var originalTitle = array[i].original_title;
+    if (typeof(originalTitle) == "undefined") {
+      originalTitle = array[i].original_name;
+    }
     // handlebars
     var source = document.getElementById("films-template").innerHTML;
     var template = Handlebars.compile(source);
-    if (type == "movies") {
-      var context = {
-        title : array[i].title,
-        original_title : array[i].original_title,
-        original_language : printNationFlag(array[i].original_language),
-        vote_average : array[i].vote_average,
-        tagStar : printVoteStar(array[i].vote_average),
-        type : "movies"
-      };
-    } else if (type == "series") {
-      var context = {
-        title : array[i].name,
-        original_title : array[i].original_name,
-        original_language : printNationFlag(array[i].original_language),
-        vote_average : array[i].vote_average,
-        tagStar : printVoteStar(array[i].vote_average),
-        type : "series"
-      };
-    }
+    var context = {
+      title : title,
+      original_title : originalTitle,
+      original_language : printNationFlag(array[i].original_language),
+      vote_average : array[i].vote_average,
+      tagStar : printVoteStar(array[i].vote_average),
+    };
     var html = template(context);
     $(".films").append(html);
   }
@@ -114,7 +92,6 @@ function printVoteStar(num) {
 }
 
 function printNationFlag(string) {
-  console.log(string);
   var arrayFlags = ["de", "en", "es", "fr", "it"];
   if (arrayFlags.includes(string)) {
     var flag = "<img src=flags/"+ string +".svg>";
