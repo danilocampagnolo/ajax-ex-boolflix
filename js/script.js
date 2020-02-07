@@ -45,7 +45,8 @@ function printFilmsFound(array) {
     var context = {
       title : array[i].title,
       original_title : array[i].original_title,
-      original_language : array[i].original_language,
+      original_language_string : array[i].original_language,
+      original_language : printNationFlag(array[i].original_language),
       vote_average : array[i].vote_average,
       tagStar : printVoteStar(array[i].vote_average)
     };
@@ -75,4 +76,9 @@ function printVoteStar(num) {
     }
   }
   return tagStar;
+}
+
+function printNationFlag(string) {
+  var flag = "flags/" + string + ".svg";
+  return flag
 }
