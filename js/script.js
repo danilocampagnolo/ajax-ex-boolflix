@@ -12,7 +12,7 @@ function search() {
   var urlSeries = "https://api.themoviedb.org/3/search/tv";
   var api_key = "7da5370534299b384b1d9988b39b33f8";
   getFilms(urlMovies, api_key, userFilm);
-  getFilms(urlSeries, api_key, userFilm)
+  getFilms(urlSeries, api_key, userFilm);
 }
 
 function getFilms(url, api_key, string) {
