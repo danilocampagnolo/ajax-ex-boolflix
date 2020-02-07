@@ -60,9 +60,9 @@ function printNoResult() {
 function printVoteStar(array) {
   for (var i = 0; i < array.length; i++) {
     console.log(array[i].vote_average);
-    var numStarFull = Math.round(array[i].vote_average) / 2;
+    var numStarFull = (Math.round(array[i].vote_average) / 2);
     console.log(numStarFull);
-    var numStarEmpty = 5 - numStarFull;
+    var numStarEmpty = (5 - numStarFull);
     console.log(numStarEmpty);
   }
 }
