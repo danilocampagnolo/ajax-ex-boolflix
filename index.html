@@ -23,11 +23,11 @@
 
   <script id="films-template" type="text/x-handlebars-template">
     <li class="entry">
-      {{title}}
+      <h3>{{title}}</h3>
       <ul class="details">
-        <li>Original Title: {{original_title}}</li>
-        <li>Original Language: {{original_language_string}} <img src="{{{original_language}}}" alt=""> </li>
-        <li>Vote: {{vote_average}} {{{tagStar}}} </li>
+        <li><h4>Original Title: </h4> {{original_title}}</li>
+        <li><h4>Original Language: </h4> {{original_language_string}} <img src="{{{original_language}}}" alt=""> </li>
+        <li><h4>Vote: </h4> {{vote_average}} {{{tagStar}}} </li>
       </ul>
     </li>
   </script>
