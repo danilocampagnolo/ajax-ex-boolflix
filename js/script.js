@@ -59,6 +59,7 @@ function printFilmsFound(array) {
     var source = document.getElementById("films-template").innerHTML;
     var template = Handlebars.compile(source);
     var context = {
+      poster_path : "https://image.tmdb.org/t/p/w185"+array[i].poster_path,
       title : title,
       original_title : originalTitle,
       original_language : printNationFlag(array[i].original_language),
