@@ -1,41 +1,58 @@
 
 $(document).ready(function() {
-  $("button[name='search']").click(function() {
+  $("button[name='search-film']").click(function() {
     var userFilm = $("input[name='title-to-find']").val();
-    $.ajax({
-      url: "https://api.themoviedb.org/3/search/movie",
-      method: "GET",
-      data: {
-        api_key: "7da5370534299b384b1d9988b39b33f8",
-        query: userFilm,
-        language: "it-IT"
-      },
-      success: function(data) {
-        var filmsFound = data.results;
-        if (filmsFound.length == 0) {
-          $("input[name='title-to-find']").val("");
-          alert("nessun risultato");
-        } else {
-          printFilmsFound(filmsFound);
-        }
-      },
-      error: function(errors) {
-        alert("errore " + errors)
-      }
-    });
+    getMovies(userFilm);
   });
 });
 
-function printFilmsFound(array) {
-  $(".films").text("");
+// ================ FUNCTION =================
+function resetSearch() {
   $("input[name='title-to-find']").val("");
+  $(".films").text("");
+}
+
+function getMovies(string) {
+  var url = "https://api.themoviedb.org/3/search/movie";
+  var api_key = "7da5370534299b384b1d9988b39b33f8";
+  $.ajax({
+    url: url,
+    method: "GET",
+    data: {
+      api_key: api_key,
+      query: string,
+      language: "it-IT"
+    },
+    success: function(data) {
+      resetSearch();
+      var filmsFound = data.results;
+      if (filmsFound.length == 0) {
+        printNoResult();
+      } else {
+        printFilmsFound(filmsFound);
+      }
+    },
+    error: function(errors) {
+      alert("errore " + errors);
+    }
+  });
+}
+
+function printFilmsFound(array) {
   for (var i = 0; i < array.length; i++) {
-    array[i]
     // handlebars
-    var source = document.getElementById("entry-template").innerHTML;
+    var source = document.getElementById("films-template").innerHTML;
     var template = Handlebars.compile(source);
     var context = array[i];
     var html = template(context);
     $(".films").append(html);
   }
+}
+
+function printNoResult() {
+  // handlebars
+  var source = document.getElementById("noresult-template").innerHTML;
+  var template = Handlebars.compile(source);
+  var html = template();
+  $(".films").append(html);
 }

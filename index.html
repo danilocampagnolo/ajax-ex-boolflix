@@ -14,24 +14,28 @@
 </head>
 <body>
   <input type="text" name="title-to-find" value="" placeholder="cerca">
-  <button type="button" name="search"> Invio </button>
+  <button type="button" name="search-film"> Invio </button>
 
   <ul class="films">
 
   </ul>
 
-  <script id="entry-template" type="text/x-handlebars-template">
-  <li class="entry">
-    <h4>Title </h4>
-    {{title}}
-    <h4>Original Title </h4>
-    {{original_title}}
-    <h4>Original Language </h4>
-    {{original_language}}
-    <h4>Vote</h4>
-    {{vote_average}}
-  </li>
-</script>
+  <script id="films-template" type="text/x-handlebars-template">
+    <li class="entry">
+      {{title}}
+      <ul>
+        <li>Original Title: {{original_title}}</li>
+        <li>Original Language: {{original_language}}</li>
+        <li>Vote: {{vote_average}}</li>
+      </ul>
+    </li>
+  </script>
+
+  <script id="noresult-template" type="text/x-handlebars-template">
+    <li class="entry">
+      Non ci sono risultati.
+    </li>
+  </script>
 
   <script src="js/script.js" charset="utf-8"></script>
 </body>
