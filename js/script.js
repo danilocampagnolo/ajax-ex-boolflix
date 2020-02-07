@@ -45,8 +45,8 @@ function printFilmsFound(array) {
     var context = {
       title : array[i].title,
       original_title : array[i].original_title,
-      original_language_string : array[i].original_language,
-      original_language : printNationFlag(array[i].original_language),
+      original_language : flagNotAvaible(array[i].original_language),
+      original_language_flag : printNationFlag(array[i].original_language),
       vote_average : array[i].vote_average,
       tagStar : printVoteStar(array[i].vote_average)
     };
@@ -68,8 +68,6 @@ function printVoteStar(num) {
   var tagStar = '';
   for (var i = 0; i < 5; i++) {
     if (i < vote) {
-      console.log(num);
-      console.log(vote);
       var tagStar = tagStar + " <i class='fas fa-star'></i>";
     } else {
       var tagStar = tagStar + "<i class='far fa-star'></i>";
@@ -79,6 +77,16 @@ function printVoteStar(num) {
 }
 
 function printNationFlag(string) {
-  var flag = "flags/" + string + ".svg";
+  var arrayFlags = ["de", "en", "es", "fr", "it"];
+  if (arrayFlags.includes(string)) {
+    var flag = "flags/" + string + ".svg";
+  } else {
+    flagNotAvaible();
+  }
   return flag
+}
+
+function flagNotAvaible(string) {
+  message = string + " Flag is not avaible"
+  return message
 }
