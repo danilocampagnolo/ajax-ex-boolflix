@@ -39,11 +39,16 @@ function resetSearch() {
 
 function printFilmsFound(array) {
   for (var i = 0; i < array.length; i++) {
-    printVoteStar(array[i].vote_average);
     // handlebars
     var source = document.getElementById("films-template").innerHTML;
     var template = Handlebars.compile(source);
-    var context = array[i];
+    var context = {
+      title : array[i].title,
+      original_title : array[i].original_title,
+      original_language : array[i].original_language,
+      vote_average : array[i].vote_average,
+      tagStar : printVoteStar(array[i].vote_average)
+    };
     var html = template(context);
     $(".films").append(html);
   }
@@ -58,13 +63,14 @@ function printNoResult() {
 }
 
 function printVoteStar(num) {
-  var numStarFull = (Math.round(num) / 2);
+  vote = Math.round(num) / 2;
   var tagStar = '';
   for (var i = 0; i < 5; i++) {
-    if (i < num) {
-      tagStar = "<i class='fas fa-star star-full'></i>"
+    if (i < vote) {
+      var tagStar = "<i class='fas fa-star'></i>";
     } else {
-      tagStar = "<i class='far fa-star star-empty'></i>"
+      var tagStar = "<i class='far fa-star'></i>";
     }
   }
+  return tagStar;
 }
