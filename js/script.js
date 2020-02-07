@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   $("button[name='search-film']").click(function() {
     var userFilm = $("input[name='title-to-find']").val();
@@ -7,11 +6,6 @@ $(document).ready(function() {
 });
 
 // ================ FUNCTION =================
-function resetSearch() {
-  $("input[name='title-to-find']").val("");
-  $(".films").text("");
-}
-
 function getMovies(string) {
   var url = "https://api.themoviedb.org/3/search/movie";
   var api_key = "7da5370534299b384b1d9988b39b33f8";
@@ -36,6 +30,11 @@ function getMovies(string) {
       alert("errore " + errors);
     }
   });
+}
+
+function resetSearch() {
+  $("input[name='title-to-find']").val("");
+  $(".films").text("");
 }
 
 function printFilmsFound(array) {
