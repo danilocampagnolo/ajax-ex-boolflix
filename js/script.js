@@ -72,11 +72,14 @@ function printFilmsFound(array) {
 }
 
 function printNoResult() {
-  // handlebars
-  var source = document.getElementById("noresult-template").innerHTML;
-  var template = Handlebars.compile(source);
-  var html = template();
-  $(".films").append(html);
+
+  if (!$(".films").text("Non ci sono risultati.")) {
+    // handlebars
+    var source = document.getElementById("noresult-template").innerHTML;
+    var template = Handlebars.compile(source);
+    var html = template();
+    $(".films").append(html);
+  }
 }
 
 function printVoteStar(num) {
