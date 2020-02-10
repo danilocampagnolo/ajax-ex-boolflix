@@ -3,6 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+::-webkit-scrollbar {
+display: none;
+}
 body {
   background: rgb(67,67,67);
 }
@@ -50,14 +53,16 @@ input {
 .card:hover img {
   opacity: 0;
 }
+
 .details {
   display: none;
   position: absolute;
-  top: 50px;
-  left: 10px;
+  top: 0;
+  left: 0;
+  padding: 50px 0 0 10px;
   height: 100%;
   color: #ffff;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .card:hover .details {
   display: block;
