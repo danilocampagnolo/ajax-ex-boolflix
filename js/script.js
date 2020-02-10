@@ -42,7 +42,9 @@ function getFilms(url, api_key, string) {
       }
     },
     error: function(errors) {
-      alert("errore " + errors);
+      if (errors.status != "422") {
+        alert("errore " + errors);
+      }
     }
   });
 }
