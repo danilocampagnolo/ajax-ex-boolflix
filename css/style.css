@@ -18,7 +18,7 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 100px;
-  background: black;
+  background: rgb(0, 0, 0);
   padding: 0 40px;
   margin-bottom: 20px;
 }
@@ -38,8 +38,8 @@ header h1 {
   margin-left: 40px;
   width: 340px;
   height: 510px;
-  background-color: black;
-  border: 1px solid white;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid #ffff;
 }
 .card img {
   width: 100%;
@@ -53,7 +53,7 @@ header h1 {
   position: absolute;
   top: 50px;
   left: 10px;
-  color: white;
+  color: #ffff;
 }
 .card:hover .details {
   display: block;
@@ -61,18 +61,6 @@ header h1 {
 .details img {
   width: 15px;
 }
-
-
-/* .entry {
-  margin-top: 5px;
+.details .fa-star {
+  color: rgb(255,189,0);
 }
-.films {
-  margin-left: 20px;
-}
-.details {
-  margin-left: 40px;
-}
-
-.poster {
-  margin-top: 40px;
-} */
