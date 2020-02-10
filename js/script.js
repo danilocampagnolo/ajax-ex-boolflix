@@ -48,8 +48,10 @@ function resetSearch() {
 function printFilmsFound(array) {
   for (var i = 0; i < array.length; i++) {
     var title = array[i].title;
+    var type = "Film";
     if (typeof(title) == "undefined") {
       title = array[i].name;
+      type = "TV serie";
     }
     var originalTitle = array[i].original_title;
     if (typeof(originalTitle) == "undefined") {
@@ -65,6 +67,7 @@ function printFilmsFound(array) {
       original_language : printNationFlag(array[i].original_language),
       vote_average : array[i].vote_average,
       tagStar : printVoteStar(array[i].vote_average),
+      type : type
     };
     var html = template(context);
     $(".films").append(html);
