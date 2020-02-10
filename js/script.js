@@ -1,4 +1,9 @@
 $(document).ready(function() {
+  // $(".search input").keyup(function() {
+  //     search();
+  //     resetSearch();
+  //   });
+
   $("button[name='search-film']").click(function() {
     search();
     resetSearch();
@@ -13,6 +18,11 @@ function search() {
   var api_key = "7da5370534299b384b1d9988b39b33f8";
   getFilms(urlMovies, api_key, userFilm);
   getFilms(urlSeries, api_key, userFilm);
+}
+
+function resetSearch() {
+  $("input[name='title-to-find']").val("");
+  $(".films").text("");
 }
 
 function getFilms(url, api_key, string) {
@@ -40,15 +50,10 @@ function getFilms(url, api_key, string) {
   });
 }
 
-function resetSearch() {
-  $("input[name='title-to-find']").val("");
-  $(".films").text("");
-}
-
 function printFilmsFound(array) {
   for (var i = 0; i < array.length; i++) {
     var title = array[i].title;
-    var type = "Film";
+    var type = "Movie";
     if (typeof(title) == "undefined") {
       title = array[i].name;
       type = "TV serie";
@@ -61,7 +66,7 @@ function printFilmsFound(array) {
     var source = document.getElementById("films-template").innerHTML;
     var template = Handlebars.compile(source);
     var context = {
-      poster_path : "https://image.tmdb.org/t/p/w185"+array[i].poster_path,
+      poster_path : "https://image.tmdb.org/t/p/w342"+array[i].poster_path,
       title : title,
       original_title : originalTitle,
       original_language : printNationFlag(array[i].original_language),
@@ -70,17 +75,6 @@ function printFilmsFound(array) {
       type : type
     };
     var html = template(context);
-    $(".films").append(html);
-  }
-}
-
-function printNoResult() {
-
-  if (!$(".films").text("Non ci sono risultati.")) {
-    // handlebars
-    var source = document.getElementById("noresult-template").innerHTML;
-    var template = Handlebars.compile(source);
-    var html = template();
     $(".films").append(html);
   }
 }
@@ -107,4 +101,15 @@ function printNationFlag(string) {
     var flag = string;
   }
   return flag
+}
+
+function printNoResult() {
+
+  if (!$(".films").text("Non ci sono risultati.")) {
+    // handlebars
+    var source = document.getElementById("noresult-template").innerHTML;
+    var template = Handlebars.compile(source);
+    var html = template();
+    $(".films").append(html);
+  }
 }

@@ -3,6 +3,20 @@
   margin: 0;
   box-sizing: border-box;
 }
+a {
+  text-decoration: none;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  background: black;
+  padding: 0 20px;
+}
+header h1 {
+  color: rgb(202,0,0);
+}
 h4 {
   display: inline;
 }

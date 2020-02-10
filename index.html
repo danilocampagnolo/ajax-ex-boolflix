@@ -15,12 +15,25 @@
   <title>Document</title>
 </head>
 <body>
-  <input type="text" name="title-to-find" value="" placeholder="cerca">
-  <button type="button" name="search-film"> Invio </button>
 
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <a href="#">
+        <h1>BOOLFLIX</h1>
+      </a>
+    </div>
+    <div class="search">
+      <input type="text" name="title-to-find" value="" placeholder="cerca">
+      <button type="button" name="search-film"> Invio </button>
+    </div>
+  </header>
+
+  <!-- /HEADER -->
   <ul class="films">
   </ul>
 
+  <!-- SCRIPT -->
   <script id="noresult-template" type="text/x-handlebars-template">
     <li class="entry">
       Non ci sono risultati.
