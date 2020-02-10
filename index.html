@@ -28,10 +28,14 @@
       <button type="button" name="search-film"> Invio </button>
     </div>
   </header>
-
   <!-- /HEADER -->
-  <ul class="films">
-  </ul>
+
+  <!-- MAIN -->
+  <main>
+    <ul class="films">
+    </ul>
+  </main>
+  <!-- /MAIN -->
 
   <!-- SCRIPT -->
   <script id="noresult-template" type="text/x-handlebars-template">
@@ -41,27 +45,34 @@
   </script>
 
   <script id="films-template" type="text/x-handlebars-template">
-    <img class="poster" src="{{poster_path}}" alt="">
-    <li class="entry">
-      <h3>{{title}}</h3>
-      <ul class="details">
-        <li>
-          <h4>Original Title:</h4>
-          {{original_title}}
-        </li>
-        <li>
-          <h4>Original Language:</h4>
-          {{{original_language}}}
-        </li>
-        <li>
-          <h4>Vote:</h4>
-          {{vote_average}} {{{tagStar}}}
-        </li>
-        <li>
-          <h4>Type:</h4>
-          {{type}}
-        </li>
-      </ul>
+    <li class="card">
+      <div class="poster">
+        <img  src="{{poster_path}}" alt="">
+      </div>
+        <ul class="details">
+          <li>
+            <h4>Title:</h4>
+            {{title}}
+          </li>
+          <li>
+            <h4>Original Title:</h4>
+            {{original_title}}
+          </li>
+          <li>
+            <h4>Original Language:</h4>
+            {{{original_language}}}
+          </li>
+          <li>
+            <h4>Vote:</h4>
+            {{vote_average}} {{{tagStar}}}
+          </li>
+          <li>
+            <h4>Type:</h4>
+            {{type}}
+          </li>
+        </ul>
+
+
     </li>
   </script>
 
