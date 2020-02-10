@@ -87,9 +87,9 @@ function printVoteStar(num) {
   var tagStar = '';
   for (var i = 0; i < 5; i++) {
     if (i < vote) {
-      var tagStar = tagStar + " <i class='fas fa-star'></i>";
+      tagStar += "<i class='fas fa-star'></i>";
     } else {
-      var tagStar = tagStar + "<i class='far fa-star'></i>";
+      tagStar += "<i class='far fa-star'></i>";
     }
   }
   return tagStar;
