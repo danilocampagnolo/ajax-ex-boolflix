@@ -1,13 +1,10 @@
 $(document).ready(function() {
-  // $(".search input").keyup(function() {
-  //     search();
-  //     resetSearch();
-  //   });
-
-  $("button[name='search-film']").click(function() {
-    search();
-    resetSearch();
-  });
+  $(".search input").keypress(function() {
+    if (event.which == 13) {
+      search();
+      resetSearch();
+      }
+    });
 });
 
 // ================ FUNCTION =================
@@ -72,7 +69,8 @@ function printFilmsFound(array) {
       original_language : printNationFlag(array[i].original_language),
       vote_average : array[i].vote_average,
       tagStar : printVoteStar(array[i].vote_average),
-      type : type
+      type : type,
+      overview : printOverview(array[i].overview)
     };
     var html = template(context);
     $(".films").append(html);
@@ -114,12 +112,22 @@ function printNoResult() {
   }
 }
 
-function printPoster(array, string) {
+function printPoster(string) {
   var poster = "https://image.tmdb.org/t/p/w342";
-  if (array == null) {
+  if (string == null) {
     poster = "img/image-not-available.jpg";
   } else {
-    poster += array;
+    poster += string;
   }
   return poster
+}
+
+function printOverview(string) {
+  var overview = "";
+  if (string.length == 0) {
+    overview = "Overview non disponibile.";
+  } else {
+    overview = string;
+  }
+  return overview
 }
