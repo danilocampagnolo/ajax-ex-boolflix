@@ -7,6 +7,7 @@
 display: none;
 }
 body {
+  font-family: 'Bebas Neue', sans-serif;
   background: rgb(67,67,67);
 }
 a {
@@ -29,6 +30,7 @@ header {
   padding: 0 40px;
 }
 header h1 {
+  font-size: 40px;
   color: rgb(202,0,0);
 }
 input {
@@ -74,7 +76,7 @@ input {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 50px 10px 0 10px;
+  padding: 50px 10px 10px 10px;
   height: 100%;
   color: #ffff;
   overflow-y: scroll;
