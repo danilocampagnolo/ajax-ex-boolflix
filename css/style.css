@@ -15,6 +15,9 @@ a {
 li {
   list-style: none;
 }
+.display_none {
+  display: none;
+}
 
 /* HEADER */
 header {
@@ -34,10 +37,18 @@ input {
 }
 
 /* MAIN */
-.films h4 {
+.container h2 {
+  font-size: 30px;
+  color: #fff;
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+.films h4,
+.serie h4 {
   display: inline;
 }
-.films {
+.films,
+.serie {
   display: flex;
   flex-wrap: wrap;
 }

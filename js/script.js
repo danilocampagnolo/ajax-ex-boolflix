@@ -2,28 +2,29 @@ $(document).ready(function() {
   $(".search input").keypress(function() {
     if (event.which == 13) {
       search();
-      resetSearch();
       }
     });
 });
 
 // ================ FUNCTIONS =================
 function search() {
-
-  var userFilm = $("input[name='title-to-find']").val();
-  var urlMovies = "https://api.themoviedb.org/3/search/movie";
-  var urlSeries = "https://api.themoviedb.org/3/search/tv";
+  $(".container h2").removeClass("display_none");
+  var query = $("input[name='title-to-find']").val();
+  resetSearch();
+  var urlMovie = "https://api.themoviedb.org/3/search/movie";
+  var urlSerie = "https://api.themoviedb.org/3/search/tv";
   var api_key = "7da5370534299b384b1d9988b39b33f8";
-  getFilms(urlMovies, api_key, userFilm);
-  getFilms(urlSeries, api_key, userFilm);
+  getData(urlMovie, api_key, query, "film", ".films");
+  getData(urlSerie, api_key, query, "serie", ".serie");
 }
 
 function resetSearch() {
   $("input[name='title-to-find']").val("");
   $(".films").text("");
+  $(".serie").text("");
 }
 
-function getFilms(url, api_key, string) {
+function getData(url, api_key, string, type, container) {
   var url = url;
   var api_key = api_key;
   $.ajax({
@@ -35,11 +36,11 @@ function getFilms(url, api_key, string) {
       language: "it-IT"
     },
     success: function(data) {
-      var filmsFound = data.results;
-      if (filmsFound.length == 0) {
-        printNoResult();
+      if (data.total_results > 0) {
+        var results = data.results;
+        printResults(type, results)
       } else {
-        printFilmsFound(filmsFound);
+        printNoResult($(container));
       }
     },
     error: function(errors) {
@@ -50,20 +51,20 @@ function getFilms(url, api_key, string) {
   });
 }
 
-function printFilmsFound(array) {
+function printResults(type, array) {
   for (var i = 0; i < array.length; i++) {
     var title = array[i].title;
-    var type = "Movie";
+    var container = $(".films");
     if (typeof(title) == "undefined") {
       title = array[i].name;
-      type = "TV serie";
+      container = $(".serie");
     }
     var originalTitle = array[i].original_title;
     if (typeof(originalTitle) == "undefined") {
       originalTitle = array[i].original_name;
     }
     // handlebars
-    var source = document.getElementById("films-template").innerHTML;
+    var source = $('#films-template').html();
     var template = Handlebars.compile(source);
     var context = {
       poster_path : printPoster(array[i].poster_path),
@@ -76,7 +77,7 @@ function printFilmsFound(array) {
       overview : printOverview(array[i].overview)
     };
     var html = template(context);
-    $(".films").append(html);
+    container.append(html);
   }
 }
 
@@ -106,13 +107,11 @@ function printNationFlag(string) {
 
 function printNoResult() {
 
-  if (!$(".films").text("Non ci sono risultati.")) {
-    // handlebars
-    var source = document.getElementById("noresult-template").innerHTML;
-    var template = Handlebars.compile(source);
-    var html = template();
-    $(".films").append(html);
-  }
+  // handlebars
+  var source = document.getElementById("noresult-template").innerHTML;
+  var template = Handlebars.compile(source);
+  var html = template();
+  container.append(html);
 }
 
 function printPoster(string) {
