@@ -4,6 +4,10 @@ $(document).ready(function() {
       search();
       }
     });
+    $(".search i").click(function() {
+      $('.transform-input').toggleClass('transform-active-input');
+      $(".search > div").toggleClass("border-input");
+    });
 });
 
 // ================ FUNCTIONS =================
@@ -53,16 +57,16 @@ function getData(url, api_key, string, type, container) {
 
 function printResults(type, array) {
   for (var i = 0; i < array.length; i++) {
-    var title = array[i].title;
-    var container = $(".films");
-    if (typeof(title) == "undefined") {
+    if (type == "film") {
+      var title = array[i].title;
+      var originalTitle = array[i].original_title;
+      var container = $(".films");
+    } else if (type == "serie") {
       title = array[i].name;
+      originalTitle = array[i].original_name;
       container = $(".serie");
     }
-    var originalTitle = array[i].original_title;
-    if (typeof(originalTitle) == "undefined") {
-      originalTitle = array[i].original_name;
-    }
+
     // handlebars
     var source = $('#films-template').html();
     var template = Handlebars.compile(source);
