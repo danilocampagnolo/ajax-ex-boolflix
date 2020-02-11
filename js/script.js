@@ -105,7 +105,7 @@ function printNationFlag(string) {
   return flag
 }
 
-function printNoResult() {
+function printNoResult(container) {
 
   // handlebars
   var source = document.getElementById("noresult-template").innerHTML;

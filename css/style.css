@@ -27,7 +27,6 @@ header {
   height: 100px;
   background: rgb(0, 0, 0);
   padding: 0 40px;
-  margin-bottom: 20px;
 }
 header h1 {
   color: rgb(202,0,0);
@@ -37,10 +36,12 @@ input {
 }
 
 /* MAIN */
+.container {
+  padding: 40px 40px 0 40px;
+}
 .container h2 {
   font-size: 30px;
   color: #fff;
-  margin-left: 20px;
   margin-bottom: 30px;
 }
 .films h4,
@@ -55,11 +56,10 @@ input {
 .card {
   position: relative;
   margin-bottom: 40px;
-  margin-left: 40px;
   width: 340px;
   height: 510px;
   background-color: rgb(0, 0, 0);
-  border: 1px solid #ffff;
+  border: 1px solid rgb(0, 0, 0);
 }
 .card img {
   width: 100%;
@@ -88,4 +88,10 @@ input {
 }
 .details .fa-star {
   color: rgb(255,189,0);
+}
+
+li.entry {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  color: white;
 }
