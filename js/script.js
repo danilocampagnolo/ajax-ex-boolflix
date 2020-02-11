@@ -7,8 +7,9 @@ $(document).ready(function() {
     });
 });
 
-// ================ FUNCTION =================
+// ================ FUNCTIONS =================
 function search() {
+
   var userFilm = $("input[name='title-to-find']").val();
   var urlMovies = "https://api.themoviedb.org/3/search/movie";
   var urlSeries = "https://api.themoviedb.org/3/search/tv";
@@ -115,7 +116,7 @@ function printNoResult() {
 }
 
 function printPoster(string) {
-  var poster = "https://image.tmdb.org/t/p/w342";
+  var poster = "https://image.tmdb.org/t/p/w300";
   if (string == null) {
     poster = "img/image-not-available.jpg";
   } else {
