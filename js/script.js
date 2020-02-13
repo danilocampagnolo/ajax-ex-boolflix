@@ -2,15 +2,19 @@ $(document).ready(function() {
   $(".search input").keypress(function() {
     if (event.which == 13) {
       search();
+      toggleInput();
       }
     });
     $(".search i").click(function() {
-      $('.transform-input').toggleClass('transform-active-input');
-      $(".search > div").toggleClass("border-input");
+      toggleInput();
     });
 });
 
 // ================ FUNCTIONS =================
+function toggleInput() {
+  $('.transform-input').toggleClass('transform-active-input');
+  $(".search > div").toggleClass("border-input");
+}
 function search() {
   $(".container h2").removeClass("display_none");
   var query = $("input[name='title-to-find']").val();
@@ -29,8 +33,6 @@ function resetSearch() {
 }
 
 function getData(url, api_key, string, type, container) {
-  var url = url;
-  var api_key = api_key;
   $.ajax({
     url: url,
     method: "GET",
@@ -78,6 +80,7 @@ function printResults(type, array) {
       vote_average : array[i].vote_average,
       tagStar : printVoteStar(array[i].vote_average),
       type : type,
+      cast : printCast(array[i].id, type),
       overview : printOverview(array[i].overview)
     };
     var html = template(context);
@@ -121,7 +124,7 @@ function printNoResult(container) {
 function printPoster(string) {
   var poster = "https://image.tmdb.org/t/p/w300";
   if (string == null) {
-    poster = "img/image-not-available.jpg";
+    poster = "img/image-not-avaible.jpg";
   } else {
     poster += string;
   }
@@ -136,4 +139,30 @@ function printOverview(string) {
     overview = string;
   }
   return overview
+}
+
+function printCast(string, type) {
+  $.ajax({
+   url: 'https://api.themoviedb.org/3/' + type +'/' + string + '/credits',
+   data: {
+     api_key: "7da5370534299b384b1d9988b39b33f8"
+   },
+   success: function (data) {
+     var cast = data.cast;
+     console.log(cast);
+     // if (cast.length >= 4) {
+     //
+     //   var starring = '<span class="bold">Starring: </span>';
+     //   for (var i = 0; i < 4; i++) {
+     //     if (i == 3) {
+     //       starring = starring + cast[i].name + '.';
+     //     } else {
+     //       starring = starring + cast[i].name + ', ';
+     //     }
+     //   }
+     //  }
+   },
+   error: function (richiesta, stato, errore) {
+   }
+  })
 }
