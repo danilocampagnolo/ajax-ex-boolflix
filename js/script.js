@@ -80,7 +80,7 @@ function printResults(type, array) {
       vote_average : array[i].vote_average,
       tagStar : printVoteStar(array[i].vote_average),
       type : type,
-      cast : printCast(array[i].id, type),
+      // cast : printCast(array[i].id, type),
       overview : printOverview(array[i].overview)
     };
     var html = template(context);
@@ -141,28 +141,17 @@ function printOverview(string) {
   return overview
 }
 
-function printCast(string, type) {
-  $.ajax({
-   url: 'https://api.themoviedb.org/3/' + type +'/' + string + '/credits',
-   data: {
-     api_key: "7da5370534299b384b1d9988b39b33f8"
-   },
-   success: function (data) {
-     var cast = data.cast;
-     console.log(cast);
-     // if (cast.length >= 4) {
-     //
-     //   var starring = '<span class="bold">Starring: </span>';
-     //   for (var i = 0; i < 4; i++) {
-     //     if (i == 3) {
-     //       starring = starring + cast[i].name + '.';
-     //     } else {
-     //       starring = starring + cast[i].name + ', ';
-     //     }
-     //   }
-     //  }
-   },
-   error: function (richiesta, stato, errore) {
-   }
-  })
-}
+// function printCast(string, type) {
+//   $.ajax({
+//    url: 'https://api.themoviedb.org/3/' + type +'/' + string + '/credits',
+//    data: {
+//      api_key: "7da5370534299b384b1d9988b39b33f8"
+//    },
+//    success: function (data) {
+//      var cast = data.cast;
+//      console.log(cast);
+//    },
+//    error: function (richiesta, stato, errore) {
+//    }
+//   })
+// }
